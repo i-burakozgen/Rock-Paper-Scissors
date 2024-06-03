@@ -14,7 +14,14 @@ function getComputerChoice(){
 
 var humanScore = 0;
 var computerScore = 0;
+let rounds = 0;
+let maxRound = 5;
 function playThrough(humanChoice){
+    if (rounds >= maxRound){
+        alert("Game over");
+        return;
+    }
+    
     const result = document.querySelector("#results");
     const computerSelection = getComputerChoice();
     let resultMessage;
@@ -38,6 +45,18 @@ function playThrough(humanChoice){
     }
     
     result.textContent = resultMessage;
+    rounds++;
+    if (rounds >= maxRounds) {
+        let finalMessage = `Game Over! Final Score - Player: ${humanScore}, Computer: ${computerScore}. `;
+        if (humanScore > computerScore) {
+            finalMessage += "You win!";
+        } else if (humanScore < computerScore) {
+            finalMessage += "Computer wins!";
+        } else {
+            finalMessage += "It's a tie!";
+        }
+        alert(finalMessage);
+    }
 
 }
 
@@ -74,9 +93,15 @@ const buttonScissors = document.createElement("button");
 buttonScissors.textContent = "scissors";
 buttonScissors.addEventListener("click",() => playThrough("scissors"));
 
+
+
 divButton.appendChild(buttonRock);
 divButton.appendChild(buttonPaper);
 divButton.appendChild(buttonScissors);
+
+const Final = document.querySelector("#results");
+const resultsFinal = document.createElement("p");
+Final.appendChild(resultsFinal);
 
 
 
